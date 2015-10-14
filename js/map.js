@@ -27,16 +27,19 @@ var getData = function() {
 
   });
   // When your request is successful, call your customBuild function
-
 }
-
 // Loop through your data and add the appropriate layers and points
 var customBuild = function(dat) {
-      var latitude = 0.0;
-      var longitude = 0.0;
-      for (i=0; i<dat.length; i++){};
+  var race = new L.LayerGroup([]);
+  var armed = new L.LayerGroup([]);
+    //Loop through the array to add layers 
+    for (i=0; i<dat.length; i++){
 
-        
+
+      }
+
+
+
 
 
 	// Be sure to add each layer to the map
@@ -46,3 +49,5 @@ var customBuild = function(dat) {
 }
 
 
+// Each object in the array is a dictionary ie name:XXXX , race:XXXX 
+// http://stackoverflow.com/questions/17371039/how-to-add-markers-bulk-in-leaflet
