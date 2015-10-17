@@ -5,62 +5,85 @@ var drawMap = function() {
   // Create map and set view
     var map = L.map('map').setView([40.00, -100.00], 4)
   // Create a tile layer variable using the appropriate url
- L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+ var mapLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
-    
   // Add the layer to your map
-    layer.addTo(map)
+    mapLayer.addTo(map);
+    getData(map);
   }
 
   // Execute your function to get data
  
 // Function for getting data
-var getData = function() {
+var getData = function(map) {
 
   // Execute an AJAX request to get the data in data/response.js
   $.ajax({  
     url: ('../../data/response.json'),
     type:"get",
-    success: function(dat){
-      customBuild(dat);
+    success: function(data){
+      console.log("Load was a success");
+      customBuild(map,data);
+      
     }
-
+    
   });
   // When your request is successful, call your customBuild function
 }
 // Loop through your data and add the appropriate layers and points
-var customBuild = function(dat) {
-  var race = new L.LayerGroup([]);
+var customBuild = function(map,data) {
+  // var race = new L.LayerGroup([]);
   var armed = new L.LayerGroup([]);
-  var lat = 0;
-  var lng = 0;
-    //Loop through the array to add layers 
-    for (i=0; i<dat.length; i++){
-      lat = dat.d[i].lat;
-      lng = dat.d[i].lng;
 
-    
-
-      
+    // Loop through the array to add layers 
+    for (var i=0; i < data.length; i++){
+      var armed = data[i]["Armed or Unarmed?"];
+      var race = data[i].Race;
+      var circleColor, circleFill;
 
 
-      // var circle = new L.circleMarker([lat, lng]).addTo(map);
-      
-      // Add control flow to determine which layer the circle belongs to
-      // circle.addTo(layer))
 
-
+      if (data[i].Race == "Black or African American") {
+        circleColor='blue';
+        
+      }
+      else if (data[i].Race =="White"){
+        circleColor="red";
+        circleFill ="#f03"
+      }else{
+        circleColor = "black";
+        circleFill= "light-gray";
 
       }
 
 
 
+      var circle = new L.circleMarker([data[i].lat,data[i].lng],{
+        color: circleColor,
+        fillColor: circleFill,
+        radius: 5
+      });
 
 
-	// Be sure to add each layer to the map
 
-	// Once layers are on the map, add a leaflet controller that shows/hides layers
+
+
+
+
+
+
+      console.log("Race " + race);
+
+    // Add Control flow to determine layer
+    // Default to race to allow circles to appear
+      circle.addTo(map);
+    }
+    // Ommit armed at the moment
+    L.control.layers(null,race).addTo(map);
+    
+
+  // Once layers are on the map, add a leaflet controller that shows/hides layers
   
 }
 
