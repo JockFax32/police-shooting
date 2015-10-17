@@ -23,13 +23,23 @@
   </head>
   <body>
     <!-- You may want to put your title and additional informaiton here -->
-    <div class="container">
+    <div class="container-fluid">
+      <h1>Police Shootings</h1>
+      <p id="mapinfo">This map shows crowdsourced police shooting data from <a href="http://regressing.deadspin.com/deadspin-police-shooting-database-update-were-still-go-1627414202" >Deadspin.</a> Blue dots are Blacks or African-Americans, red dots are white, and grey are all other races.</p>
       <!-- This is the div that your map will go in.  You'll need to reference its id -->
       <div id="map"></div>
       </div>
     <script>
      // This is where you should execute your drawMap function
-    	drawMap();
+    	jQuery();
+      drawMap();
     </script>
+    <div class="container-fluid" id="crosstab">
+      <div clas="row">
+        <div class="col-sm-3" id="tableheader">Cross Tab</div>
+
+
+        </div>
+    </div>
   </body>
 </html>
