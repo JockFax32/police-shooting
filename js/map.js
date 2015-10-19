@@ -25,8 +25,10 @@ var getData = function(map) {
   $.ajax({  
     url: ('data/response.json'),
     type:"get",
+    dataType: "json",
     success: function(data){
-      customBuild(map,data);    
+      customBuild(map,data); 
+      console.log(data);   
     }
   });
 }
