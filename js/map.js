@@ -28,7 +28,6 @@ var getData = function(map) {
     dataType: "json",
     success: function(data){
       customBuild(map,data); 
-      console.log(data);   
     }
   });
 }
